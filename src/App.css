@@ -1,0 +1,142 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
+
+
+.poppins-400{
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+.poppins-500{
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+.poppins-900{
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+}
+.poppins-italic{
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+/* MENU LIST STYLE */
+.menuList{
+  transition: .5s ease-in-out;
+  z-index: 1;
+}
+.menuList::before{
+  position: absolute;
+  content: '';
+  width: 0%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: white;
+  z-index: -1;
+  transition: .5s ease-in-out;
+}
+.menuList:hover::before{
+  width: 100%;
+}
+.menuListFunclub{
+  transition: .5s ease-in-out;
+  z-index: 1;
+}
+.menuListFunclub::before{
+  position: absolute;
+  content: '';
+  width: 0%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #fe7f7f;
+  z-index: -1;
+  transition: .5s ease-in-out;
+}
+.menuListFunclub:hover::before{
+  width: 100%;
+}
+
+/* MENU LIST STYLE END */
+.rotateAnimation{
+  animation: rotate-animation 8s infinite linear;
+}
+@keyframes rotate-animation {
+	0% {
+		transform: rotate(0deg);
+  }
+  50% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.slide-animation{
+  animation: slide-animation 10s infinite linear;
+}
+
+@keyframes slide-animation {
+	0% {
+		transform: translateX(0);
+  }
+  15% {
+		transform: translateX(100px);
+	}
+  30% {
+		transform: translateX(100px);
+	}
+  40% {
+		transform: translateX(0);
+	}
+  60% {
+		transform: translateX(0);
+	}
+  80% {
+		transform: translateX(0);
+	}
+  90% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+.slide-animation2{
+  animation: slide-animation-2 10s infinite linear;
+}
+@keyframes slide-animation-2 {
+	0% {
+		left: -100px;
+		transform: rotate(85deg);
+  }
+  15% {
+		left: -100px;
+		transform: rotate(85deg);
+	}
+  30% {
+		left: 68px;
+		transform: rotate(85deg);
+	}
+  40% {
+		left: 68px;
+		transform: rotate(85deg);
+	}
+  60% {
+		left: 68px;
+		transform: rotate(85deg);
+	}
+  80% {
+		left: 68px;
+		transform: rotate(-85deg);
+	}
+  90% {
+		left: -100px;
+		transform: rotate(-85deg);
+	}
+	100% {
+		left: -100px;
+		transform: rotate(-85deg);
+	}
+}
+
