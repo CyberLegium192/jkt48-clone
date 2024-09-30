@@ -4,6 +4,10 @@ import CardNews from '../../component/card/news-card.jsx'
 import Dotted from '../../assets/decoration/dotRed.svg'
 import Curve from '../../assets/decoration/blackCurve.svg'
 import Triangle from '../../assets/decoration/triangle.svg'
+import { fetchNews } from '../../../libs/api/news.js'
+import { useEffect, useState } from 'react'
+
+
 
 const api = [
   { 
@@ -69,6 +73,14 @@ const api = [
 ]
 
 const newsPage = () => {
+  
+  
+  useEffect(() => {
+     fetchNews().then(res => console.log(res))
+   }, [])
+  
+  
+  
   return(
     <>
       <Navbar />
@@ -76,7 +88,7 @@ const newsPage = () => {
         <h3 className='text-3xl font-semibold poppins-500 tracking-widest text-primary'>NEWS</h3>
         
         <div className='flex flex-col gap-y-8 mt-9'>
-          {api.map(item => <CardNews item={item} key={item.id}/>)}
+          {api.map((item, i) => <CardNews item={item} key={i}/>)}
         </div>
         
         

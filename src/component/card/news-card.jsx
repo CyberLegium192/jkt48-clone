@@ -7,7 +7,7 @@ const newsCard = ({item}) => {
   
   useEffect(() => {
     switch (item.tema) {
-      case 'theater':
+      case 'theater': 
         setBorderColor('border-primary');
         setBackgroundColor('bg-primary');
         break;

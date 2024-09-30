@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Button from '@mui/joy/Button';
 import MenuButton from '@mui/joy/MenuButton';
 import Dropdown from '@mui/joy/Dropdown';
@@ -57,9 +57,9 @@ const navbar = () => {
     return(
       <>
         {
-          userData ? (
+          userData ? 
           <img src={userData.photoURL} alt='user picture' className='w-9 h-9 object-cover rounded-full border-2 border-white -z-10' />
-          ) : <FaUser className='text-white' size={26} />
+           : <FaUser className='text-white' size={26} />
         }
       </>
     )
