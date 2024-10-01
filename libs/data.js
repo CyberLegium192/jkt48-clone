@@ -88,62 +88,6 @@ export const groupData = [
     'alt': 'klp48'
   },
 ]
-export const newsData = [
-  { 
-    "id": "1",
-    "title": "Pengumuman Mengenai Birthday 2-Shot Online bulan September dengan Chekicha",
-    "tema": "event",
-    "date": "11-09-2024",
-  },
-  { 
-    "id": "2",
-    "title": "Pengumuman Mengenai Birthday 2-Shot Online bulan September dengan Chekicha",
-    "tema": "event",
-    "date": "11-09-2024",
-  },
-  { 
-    "id": "3",
-    "title": "Pengumuman Mengenai Pertunjukan Theater Kelulusan Reva Fidela",
-    "tema": "theater",
-    "date": "19-09-2024",
-  },
-  { 
-    "id": "4",
-    "title": "Pengumuman Mengenai Penjualan Digital Wallpaper Pack Edisi Sousenkyo 2024 dengan Bonus Kode Serial Pemilihan Member Single Ke-26 JKT48",
-    "tema": "other",
-    "date": "10-09-2024",
-  },
-  { 
-    "id": "5",
-    "title": "Pengumuman Mengenai Birthday 2-Shot Online bulan September dengan Chekicha",
-    "tema": "event",
-    "date": "11-09-2024",
-  },
-  { 
-    "id": "6",
-    "title": "Pengumuman Mengenai Pertunjukan Theater Kelulusan Reva Fidela",
-    "tema": "theater",
-    "date": "19-09-2024",
-  },
-  { 
-    "id": "7",
-    "title": "Pengumuman Mengenai Penjualan Digital Wallpaper Pack Edisi Sousenkyo 2024 dengan Bonus Kode Serial Pemilihan Member Single Ke-26 JKT48",
-    "tema": "other",
-    "date": "10-09-2024",
-  },
-  { 
-    "id": "8",
-    "title": "Pengumuman Mengenai Birthday 2-Shot Online bulan September dengan Chekicha",
-    "tema": "event",
-    "date": "11-09-2024",
-  },
-  { 
-    "id": "9",
-    "title": "Pengumuman Mengenai Birthday 2-Shot Online bulan September dengan Chekicha",
-    "tema": "event",
-    "date": "11-09-2024",
-  },
-]
 
 export const scheduleData = [
   { 

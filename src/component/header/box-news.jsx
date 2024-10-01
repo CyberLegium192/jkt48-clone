@@ -1,9 +1,31 @@
 import { GoDotFill } from "react-icons/go";
 import {Link} from 'react-router-dom'
 import CardNews from '../card/news-card.jsx'
-import {newsData} from '../../../libs/data.js'
+import {fetchNews} from '../../../libs/api/news.js'
+import { useEffect, useState } from 'react'
+
+import NewsCardSkeletons from '../skeleton/news-card-skeleton.jsx'
+
 
 const boxNews  = () => {
+  const [data, setData] = useState()
+  
+  useEffect(() => {
+     fetchNews().then(res => setData(res))
+   }, [])
+  
+  
+  
+  const Skeletons = () => {
+    if(!data){
+      return <NewsCardSkeletons />
+    } else{
+      return data?.slice(0, 2).map(item => <CardNews item={item} key={item.id}/>)
+    }
+  }
+  
+  
+  
   return(
     <>
       <div className='px-5 mt-4 mb-12' >
@@ -19,9 +41,11 @@ const boxNews  = () => {
 
         </div>
         
-        <div className='flex flex-col gap-y-6'>
-          {newsData.slice(-3).map(item => <CardNews item={item} key={item.id}/>)}
+        <div className='flex flex-col gap-y-8'>
+          {/*data?.slice(0, 2).map(item => <CardNews item={item} key={item.id}/>) */ }
           
+          <Skeletons />
+          {/*<NewsCardSkeletons />*/}
         </div>
         
         

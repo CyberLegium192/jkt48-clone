@@ -6,79 +6,46 @@ import Curve from '../../assets/decoration/blackCurve.svg'
 import Triangle from '../../assets/decoration/triangle.svg'
 import { fetchNews } from '../../../libs/api/news.js'
 import { useEffect, useState } from 'react'
-
-
-
-const api = [
-  { 
-    "id": "1",
-    "title": "Pengumuman Mengenai Pertunjukan Theater Kelulusan Reva Fidela",
-    "tema": "theater",
-    "date": "19-09-2024",
-  },
-  { 
-    "id": "2",
-    "title": "Pengumuman Mengenai Birthday 2-Shot Online bulan September dengan Chekicha",
-    "tema": "event",
-    "date": "11-09-2024",
-  },
-  { 
-    "id": "1",
-    "title": "Pengumuman Mengenai Pertunjukan Theater Kelulusan Reva Fidela",
-    "tema": "theater",
-    "date": "19-09-2024",
-  },
-  { 
-    "id": "3",
-    "title": "Pengumuman Mengenai Penjualan Digital Wallpaper Pack Edisi Sousenkyo 2024 dengan Bonus Kode Serial Pemilihan Member Single Ke-26 JKT48",
-    "tema": "other",
-    "date": "10-09-2024",
-  },
-  { 
-    "id": "2",
-    "title": "Pengumuman Mengenai Birthday 2-Shot Online bulan September dengan Chekicha",
-    "tema": "event",
-    "date": "11-09-2024",
-  },
-  { 
-    "id": "3",
-    "title": "Pengumuman Mengenai Penjualan Digital Wallpaper Pack Edisi Sousenkyo 2024 dengan Bonus Kode Serial Pemilihan Member Single Ke-26 JKT48",
-    "tema": "other",
-    "date": "10-09-2024",
-  },
-  { 
-    "id": "2",
-    "title": "Pengumuman Mengenai Birthday 2-Shot Online bulan September dengan Chekicha",
-    "tema": "event",
-    "date": "11-09-2024",
-  },
-  { 
-    "id": "3",
-    "title": "Pengumuman Mengenai Penjualan Digital Wallpaper Pack Edisi Sousenkyo 2024 dengan Bonus Kode Serial Pemilihan Member Single Ke-26 JKT48",
-    "tema": "other",
-    "date": "10-09-2024",
-  },
-  { 
-    "id": "1",
-    "title": "Pengumuman Mengenai Pertunjukan Theater Kelulusan Reva Fidela",
-    "tema": "theater",
-    "date": "19-09-2024",
-  },
-  { 
-    "id": "3",
-    "title": "Pengumuman Mengenai Penjualan Digital Wallpaper Pack Edisi Sousenkyo 2024 dengan Bonus Kode Serial Pemilihan Member Single Ke-26 JKT48",
-    "tema": "other",
-    "date": "10-09-2024",
-  },
-]
+import NewsCardSkeletons from '../../component/skeleton/news-card-skeleton.jsx'
 
 const newsPage = () => {
+  const [data, setData] = useState()
+  const [loading, setLoading] = useState(true);
   
+  // EFFECT UNTUK FECTHING DATA
+  useEffect(() => {
+     fetchNews()
+     .then(res => {
+       setData(res)
+       setLoading(false)
+     })
+     .catch(error => {
+        console.error(error);
+        setLoading(false);
+      });
+   }, [])
+  // UNUTK PERUBAHAN PADA DATA 
   
   useEffect(() => {
-     fetchNews().then(res => console.log(res))
-   }, [])
+    if (data) {
+      setLoading(false);
+    }
+  }, [data]); 
   
+  // SKELETONS ANIMATION 
+  const Skeletons = () => {
+    if (loading) {
+      return (
+        <>
+          {Array(8).fill(null).map((_, index) => (
+            <NewsCardSkeletons key={index} />
+          ))}
+        </>
+      )
+    } else {
+      return data?.map((item, i) => <CardNews item={item} key={i}/>)
+    }
+  }
   
   
   return(
@@ -87,8 +54,8 @@ const newsPage = () => {
       <div className='px-5 pt-7 relative pb-28 overflow-hidden'>
         <h3 className='text-3xl font-semibold poppins-500 tracking-widest text-primary'>NEWS</h3>
         
-        <div className='flex flex-col gap-y-8 mt-9'>
-          {api.map((item, i) => <CardNews item={item} key={i}/>)}
+        <div className='flex flex-col gap-y-12 mt-9'>
+          {<Skeletons/>}
         </div>
         
         

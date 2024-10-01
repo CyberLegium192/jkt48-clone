@@ -2,6 +2,6 @@ import axios from 'axios'
 
 
 export const fetchNews = async () => {
-    const response = await axios.get('http://api.evognito.my.id/JKT48/jsonNews');
-    return response
+    const response = await axios.get('https://jkt48-api-seven.vercel.app/api/news');
+    return response.data
   };

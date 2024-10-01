@@ -31,9 +31,6 @@ const userPage = () => {
   
   
   
-  
-  
-  
   if (!data) {
     return <div>Loading...</div>;
   }
