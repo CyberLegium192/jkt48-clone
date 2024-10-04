@@ -1,11 +1,5 @@
 const admin = require('firebase-admin');
 const serviceAccount = require('./serviceAccount.json')
-// import serviceAccount from'./serviceaccount.json'
-// import Admin from 'firebase-admin'
-
-
-// const serviceAccount = ServiceAccount
-// const admin = Admin
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
@@ -338,5 +332,14 @@ const saveMembersToFirestore = async () => {
   await batch.commit();
   console.log('Semua member berhasil disimpan ke Firestore!');
 };
+
+
+
+
+
+
+
+
+
 
 saveMembersToFirestore().catch(console.error);

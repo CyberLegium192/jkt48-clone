@@ -2,9 +2,17 @@ import { GoDotFill } from "react-icons/go";
 import {Link} from 'react-router-dom'
 import CardSchedule from '../card/schedule-card.jsx'
 import {scheduleData} from '../../../libs/data.js'
+import {useState, useEffect} from 'react'
+import {fetchSchedule} from '../../../libs/api/schedule.js'
 
 
 const boxSchedule = () => {
+  const [data, setData] = useState()
+  
+  useEffect(() => {
+    fetchSchedule().then(res => setData(res))
+  }, [])
+  
   return(
     <>
       <div className='px-5 mt-4 mb-12' >
@@ -21,7 +29,7 @@ const boxSchedule = () => {
         </div>
         
         <div className='grid grid-cols-2 gap-x-3 gap-y-6'>
-          {scheduleData.slice(-4).map(item => <CardSchedule item={item} key={item.id}/>)}
+          {data?.slice(0, 4).map(item => <CardSchedule item={item} key={item.id}/>)}
           
         </div>
         

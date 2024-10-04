@@ -1,14 +1,28 @@
+import {useState, useEffect} from 'react'
 import Navbar from '../../component/navbar/navbar.jsx'
 import Footer from '../../component/header/footer.jsx'
 import CardSchedule from '../../component/card/schedule-card.jsx'
 import Dotted from '../../assets/decoration/dotRed.svg'
 import Curve from '../../assets/decoration/blackCurve.svg'
 import Triangle from '../../assets/decoration/triangle.svg'
-import {scheduleData} from '../../../libs/data.js'
+import {fetchSchedule} from '../../../libs/api/schedule.js'
 
 
 
 const SchedulePage = () => {
+  const [data, setData] = useState()
+  
+  
+  useEffect(() => {
+    fetchSchedule()
+    .then(res => setData(res))
+  }, [])
+  
+  
+  
+  
+  
+  
   return(
     <>
       <Navbar />
@@ -16,7 +30,7 @@ const SchedulePage = () => {
         <h3 className='text-3xl font-semibold poppins-500 tracking-widest text-primary'>SCHEDULE</h3>
         
         <div className='grid grid-cols-2 gap-x-3 gap-y-6 mt-7'>
-          {scheduleData.map(item => <CardSchedule item={item} key={item.id}/>)}
+          {data?.map(item => <CardSchedule item={item} key={item.id}/>)}
         </div>
         
         

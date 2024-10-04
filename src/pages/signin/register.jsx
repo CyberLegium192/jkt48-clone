@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 const db = getFirestore();
 import Cookies from 'js-cookie';
@@ -14,6 +14,11 @@ import FormInput from '../../component/form/inputField.jsx'
 import SelectedOshi from '../../component/form/selected.jsx'
 import Gender from '../../component/form/gender.jsx'
 import Birth from '../../component/form/date.jsx'
+
+
+
+
+
 const Daftar = () => {
   const [fullname, setFullname] = useState('');
   const [callname, setCall] = useState('');
@@ -26,11 +31,59 @@ const Daftar = () => {
   const [alamat ,setAlamat] = useState('');
   const [provinsi ,setProvinsi] = useState('');
   const [phone ,setPhone] = useState('');
-  
-  
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  
+
+  useEffect(() => {
+    const user = Cookies.get('user');
+    if (!user) {
+      navigate('/login');
+    } else {
+      const fetchUserData = async () => {
+        const db = getFirestore();
+        const userDocRef = doc(db, 'users', JSON.parse(user).email);
+        const userDoc = await getDoc(userDocRef);
+
+        // if (userDoc.exists()) {
+        //   setData(userDoc.data());
+        // }
+      };
+      fetchUserData();
+    }
+  }, [navigate]);
+
+  
+  // VALIDATING
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!fullname) newErrors.fullname = 'Nama lengkap harus diisi';
+    if (!callname) newErrors.callname = 'Nama panggilan harus diisi';
+    if (!oshi) newErrors.oshi = 'Pilih oshimen';
+    if (!birth) newErrors.birth = 'Tanggal lahir harus diisi';
+    if (!nin) {
+      newErrors.nin = 'NIK harus diisi';
+    } else if (nin.length !== 16) {
+      newErrors.nin = 'NIK harus berjumlah 16 digit';
+    }
+    if (!phone) {
+      newErrors.phone = 'Nomor handphone harus diisi';
+    } else if (phone.length !== 12) {
+      newErrors.phone = 'Nomor handphone harus berjumlah 12 digit';
+    }
+    if (!kodePos) newErrors.kodePos = 'Kode pos harus diisi';
+    if (!alamat) newErrors.alamat = 'Alamat harus diisi';
+    if (!provinsi) newErrors.provinsi = 'Provinsi harus diisi';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  
+  
+  // HANDLE SUBMIT
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     const user = JSON.parse(Cookies.get('user'));
     const userDocRef = doc(db, 'users', user.email);
     await updateDoc(userDocRef, {
@@ -64,17 +117,17 @@ const Daftar = () => {
           
           <form onSubmit={handleSubmit}>
             {/* FULL NAME */}
-            <FormInput label='Nama Lengkap' setValue={setFullname}/>
+            <FormInput label='Nama Lengkap' setValue={setFullname} error={errors.fullname}/>
             {/* OSHI CHOOSE */}
-            <SelectedOshi label='Anggota yang paling di sukai (Oshimen)' setValue={setOshi}/>
+            <SelectedOshi label='Anggota yang paling di sukai (Oshimen)' setValue={setOshi} error={errors.oshi} />
             {/* GENDER CHOOSE */}
             <Gender setValue={setGender} gender={gender}/>
             {/* BIRTHDAY */}
-            <Birth label='Tanggal Lahir' setValue={setBirth}/>
+            <Birth label='Tanggal Lahir' setValue={setBirth} error={errors.birth}/>
             {/* NIK USER  */}
-            <FormInput label='Nomer identitas (NIK, kartu pelajar  atau PASSPORT)' setValue={setNin} type='number'/>
+            <FormInput label='Nomer identitas (NIK, kartu pelajar  atau PASSPORT)' setValue={setNin} type='number' error={errors.nin}/>
             {/* CALL NAME */}
-            <FormInput label='Nama Panggilan' setValue={setCall} />
+            <FormInput label='Nama Panggilan' setValue={setCall} error={errors.callname} />
             {/* TEMPAT TINGGAL */}
               <FormControl className='mb-5 border-b-2 border-b-gray-300 pb-7'>
                 <FormLabel className='poppins-400 ' >Tempat Tinggal</FormLabel>
@@ -83,14 +136,14 @@ const Daftar = () => {
                   />
             </FormControl>
             {/* KODE POS USER  */}
-            <FormInput label='Kode Pos' setValue={setKodePos} type='number'/>
+            <FormInput label='Kode Pos' setValue={setKodePos} type='number' error={errors.kodePos}/>
             {/* ALAMAT TEMPAT TINGGAL */}
-            <FormInput label='Alamat domisili' setValue={setAlamat} />
+            <FormInput label='Alamat domisili' setValue={setAlamat} error={errors.alamat}/>
             {/* KOTA */}
-            <FormInput label='Kota/Provinsi' setValue={setProvinsi} />
-            {/* NUMBER PHONE */}
+            <FormInput label='Kota/Provinsi' setValue={setProvinsi} error={errors.provinsi}/>
             
-            <FormInput label='Nomer Handphone' setValue={setPhone} type='number'/>
+            {/* NUMBER PHONE */}
+            <FormInput label='Nomer Handphone' setValue={setPhone} type='number' error={errors.phone}/>
             
             <button className='bg-red-500 text-white py-2 w-full rounded-full poppins-400 tracking-widest text-lg font-medium hover:bg-red-600 hover:cursor-pointer duration-500'>konfirmasi</button>
             

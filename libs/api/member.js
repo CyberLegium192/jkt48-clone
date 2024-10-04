@@ -8,7 +8,7 @@ export const fetchMembers = async () => {
     const membersArray = Object.keys(data).map((key) => {
       return {
         ...data[key],
-        firebaseId: key // Tambahkan kunci unik Firebase ke objek data
+        firebaseId: key
       };
     });
     return membersArray
