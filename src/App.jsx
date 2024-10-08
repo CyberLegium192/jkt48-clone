@@ -7,6 +7,7 @@ import {useNavigate} from 'react-router-dom'
 import HomePage from './pages/homePage/homePage.jsx'
 import Login from './pages/signin/signin.jsx'
 import News from './pages/newsPage/newsPage.jsx'
+import NewsDetail from './pages/newsPage/newsDetail.jsx'
 import Schedule from './pages/schedulePage/schedulePage.jsx'
 import Member from './pages/member/memberPage.jsx'
 
@@ -23,6 +24,7 @@ function App() {
       <Route path='/' element={<HomePage />} />
       <Route path='/login' element={<Login />} />
       <Route path='/news' element={<News />} />
+      <Route path='/news/detail/:id' element={<NewsDetail />} />
       <Route path='/schedule' element={<Schedule />} />
       <Route path='/member' element={<Member/>} />
           
